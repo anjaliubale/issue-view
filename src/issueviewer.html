@@ -5,7 +5,11 @@
     <title>Issue Viewer Test</title>
 </head>
 <body>
+<label>Please enter GitHub repository path to get list of issues:</label><br><br>
 
+<input type="text" id="repoId" name="repo" placeholder="GitHub repository,Example: jquery/jquery" style="width: 350px;">
+<input type="button" id="btnFind" value="Find Issues" onclick="getIssues(repoId.value);"><br/><br/>
+<label>Filter List:</label><br><br>
 <select id = "selFilter"
         multiple = "multiple"
         size = "4">
@@ -20,6 +24,12 @@
 </div>
 
 <script>
+
+    function getIssues(repoToGetIssues){
+        var issueView = new IssueView(repoToGetIssues);
+        var container = document.getElementById("results");
+        issueView.renderInto(container);
+    }
 
     function applyFilter(){
         var allFilters = document.getElementById("selFilter");
@@ -63,6 +73,6 @@
     }
 </script>
 
-<script src="./issue-view.js"></script>
+<script src="build/issue-view.js"></script>
 </body>
 </html>

@@ -1,6 +1,16 @@
 var IssueView = require('./issueview.js');
 
-var issueView = new IssueView("nasa/openmct");
-var container = document.getElementById("results");
-issueView.renderInto(container);
+function IssueView(repoToGetIssues){
+    var issueView = new IssueView(repoToGetIssues);
+}
+
+module.exports = {
+    renderInto: function (container) {
+        issueView.renderInto(container);
+    }
+};
+
+module.exports = exports = IssueView;
+
+
 

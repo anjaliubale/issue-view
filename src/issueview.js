@@ -1,6 +1,6 @@
 //IssueView
 function IssueView(repoPath){
-    this.repoToGetIssues = "https://api.github.com/repos/" + repoPath + "/issues";
+    this.repoToGetIssues = "https://api.github.com/repos/" + repoPath + "/issues?state=open";
 }
 
 //Initial rendering of issue list
@@ -15,6 +15,7 @@ IssueView.prototype.renderInto = function (container) {
     container.appendChild(ul);
 
     var xmlhttp = new XMLHttpRequest();
+    var lbl;
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {
             if (xmlhttp.status == 200) {
@@ -24,14 +25,16 @@ IssueView.prototype.renderInto = function (container) {
                     var li = document.createElement('li');
                     li.style.marginBottom = "10px";
                     ul.appendChild(li);
-                    li.innerHTML = li.innerHTML + allIssues[issue].labels[0].name + ": " + allIssues[issue].number + " - " + allIssues[issue].title;
+
+                    lbl = allIssues[issue].labels.length > 0 ? allIssues[issue].labels[0].name : '';
+                    li.innerHTML +=  lbl + " " + allIssues[issue].number + " - " + allIssues[issue].title;
                 }
             }
             else if (xmlhttp.status == 400) {
-                alert('There was an error: 400');
+                alert('There was an error: Please check the repository path, Example of valid path: jquery/jquery');
             }
             else {
-                alert('General failure');
+                alert('There was an error: Please check the repository path, Example of valid path: jquery/jquery');
             }
         }
     };
