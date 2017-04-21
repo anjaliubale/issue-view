@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Viewer Test</title>
+</head>
+<body>
+
+<select id = "selFilter"
+        multiple = "multiple"
+        size = "4">
+    <option value = "Bug">Bug</option>
+    <option value = "Feature">Feature</option>
+    <option value = "Question">Question</option>
+    <option value = "Help Wanted">Help Wanted</option>
+</select>
+<input type="button" id="btnFilter" value="Apply Filter" onclick="applyFilter();"><br/><br/>
+<div id="results">
+
+</div>
+
+<script>
+
+    function applyFilter(){
+        var allFilters = document.getElementById("selFilter");
+        var selectedFilters = [];
+        //get selected filters
+        for (i = 0; i < allFilters.length; i++){
+            currentFilter = allFilters[i];
+            if (currentFilter.selected == true){
+                selectedFilters.push(currentFilter.value);
+            }
+        }
+
+        var container = document.getElementById("results");
+        if(container.children.length == 0){
+            alert("No issues to filter");
+            return;
+        }
+        var ul = container.firstChild;
+        ul.style.listStyle = "none";
+        if(ul.nodeName == "UL") {
+            if (!ul.childNodes || ul.childNodes.length == 0){
+                alert("No issues to filter");
+                return;
+            }
+            var itemStr;
+            for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+                var item = ul.childNodes[itemi];
+                if (item.nodeName == "LI") {
+                    item.style.display = 'none';
+
+                    itemStr = item.innerHTML.toUpperCase();
+                    for (var i = 0; i < selectedFilters.length; i++) {
+                        if (itemStr.indexOf(selectedFilters[i].toUpperCase()) ==0) {
+                            item.style.display = 'block';
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+</script>
+
+<script src="./issue-view.js"></script>
+</body>
+</html>
