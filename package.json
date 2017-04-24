@@ -1,0 +1,22 @@
+{
+  "name": "issue-view",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anjaliubale/issue-view.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anjaliubale/issue-view/issues"
+  },
+  "homepage": "https://github.com/anjaliubale/issue-view#readme",
+  "devDependencies": {
+    "webpack": "^2.4.1"
+  }
+}
